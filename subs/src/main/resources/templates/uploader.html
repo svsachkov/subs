@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>
+    <span class="text-huge"><strong>Subs</strong></span>
+    <button id="registration-button" onclick="registration()" style="float: right;"> Регистрация </button>
+    <button id="login-button" onclick="login()" style="float: right;"> Войти </button>
+
+</p>
+
+<hr>
+<p style="text-align:center;"><span class="text-big">Сервис для обработки субтитров</span></p>
+
+<style>
+    .container {
+        height: 20px;
+        position: relative;
+        border: 0px solid green;
+    }
+
+    .center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<div class="container">
+    <div class="center">
+        <input id="fileupload" type="file" name="fileupload"/>
+        <button id="upload-button" onclick="uploadFile()"> Загрузить </button>
+    </div>
+</div>
+
+<script>
+    async function uploadFile() {
+        let formData = new FormData();
+        formData.append("file", fileupload.files[0]);
+        let response = await fetch('/upload', {
+            method: "POST",
+            body: formData
+        });
+
+        if (response.status == 200) {
+            alert("File successfully uploaded.");
+        }
+    }
+</script>
+
+</body>
+</html>
